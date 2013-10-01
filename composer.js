@@ -9,24 +9,24 @@ var MemoryStorage = module.exports.MemoryStorage = function() {
 }
 
 
-MemoryStorage.prototype.set = function(key, value) {
-    if (this._data[key[0]]) {
-        if (this._data[key[0]][key[1]]) {
-            this._data[key[0]][key[1]].push(value);
+MemoryStorage.prototype.set = function(keys, value) {
+    if (this._data[keys[0]]) {
+        if (this._data[keys[0]][keys[1]]) {
+            this._data[keys[0]][keys[1]].push(value);
         } else {
-            this._data[key[0]][key[1]] = [value];
+            this._data[keys[0]][keys[1]] = [value];
         }
     } else {
-        this._data[key[0]] = {};
-        this._data[key[0]][key[1]] = [value];
+        this._data[keys[0]] = {};
+        this._data[keys[0]][keys[1]] = [value];
     }    
 }
 
 
-MemoryStorage.prototype.get = function(key) {
-    if (this._data[key[0]]) {
-        if (this._data[key[0]][key[1]]) {
-            return this._data[key[0]][key[1]];
+MemoryStorage.prototype.get = function(keys) {
+    if (this._data[keys[0]]) {
+        if (this._data[keys[0]][keys[1]]) {
+            return this._data[keys[0]][keys[1]];
         } else {
             return [];
         }
@@ -67,40 +67,40 @@ Maker.isAlphabet = function(ch) {
 
 Maker.prototype.parse = function(text) {
 
-    var key;
+    var keys;
     var acc;
 
     for(var i=0; i<text.length; i++) {
         if (Maker.isAlphabet(text[i])) {
-            key = ['start','start'];
+            keys = ['start','start'];
             acc = '';
             sentense:
             for(;i<text.length;i++) {
                 if (Maker.isDelimeter(text[i])) {
                     if (acc != '') {
-                        this.storage.set(key, acc);                        
-                        key[0] = key[1];
-                        key[1] = acc;
+                        this.storage.set(keys, acc);                        
+                        keys[0] = keys[1];
+                        keys[1] = acc;
                         acc = '';
                     }                    
                 } else if (Maker.isSeparator(text[i])) {
                     if (acc != '') {
-                        this.storage.set(key, acc);
-                        key[0] = key[1];
-                        key[1] = acc;
+                        this.storage.set(keys, acc);
+                        keys[0] = keys[1];
+                        keys[1] = acc;
                         acc = '';
                     }                        
-                    this.storage.set(key, text[i]);
-                    key[0] = key[1];
-                    key[1] = text[i];                                                                    
+                    this.storage.set(keys, text[i]);
+                    keys[0] = keys[1];
+                    keys[1] = text[i];                                                                    
                 } else if (Maker.isEOS(text[i])) {
                     if (acc != '') {
-                        this.storage.set(key, acc);
-                        key[0] = key[1];
-                        key[1] = acc;
+                        this.storage.set(keys, acc);
+                        keys[0] = keys[1];
+                        keys[1] = acc;
                         acc = '';
                     }                        
-                    this.storage.set(key, text[i]);
+                    this.storage.set(keys, text[i]);
                     break sentense;
                 } else if (Maker.isAlphabet(text[i])) {
                     acc += text[i];
@@ -110,7 +110,7 @@ Maker.prototype.parse = function(text) {
     }
     
     if (acc != '') {
-        this.storage.set(key, acc);
+        this.storage.set(keys, acc);
     }    
 
 }
@@ -128,22 +128,22 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-Composer.prototype.speak = function(key) {
-    if (!key)  {
-        key = ['start','start'];
+Composer.prototype.speak = function(keys) {
+    if (!keys)  {
+        keys = ['start','start'];
     }
     
-    var words = this.storage.get(key);
+    var words = this.storage.get(keys);
     var word = words[getRandomInt(0, words.length - 1)];
     
     if (Maker.isEOS(word)) {
         return word;
     }
     
-    key[0] = key[1];
-    key[1] = word;
+    keys[0] = keys[1];
+    keys[1] = word;
     
-    return word + ' ' + this.speak(key);
+    return word + ' ' + this.speak(keys);
 }
 
 
