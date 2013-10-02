@@ -1,0 +1,29 @@
+{
+  "name": "composer",
+  "version": "0.0.1",
+  "description": "text generator",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YaroslavGaponov/composer.git"
+  },
+  "keywords": [
+    "Natural",
+    "Language",
+    "Generation",
+    "NLG"
+  ],
+  "author": "Yaroslav Gaponov",
+  "license": "BSD",
+  "readmeFilename": "readme.md",
+  "gitHead": "d0997ab093980c05be1b2fcfc088e6313a21f394",
+  "bugs": {
+    "url": "https://github.com/YaroslavGaponov/composer/issues"
+  }
+}
