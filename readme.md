@@ -1,5 +1,8 @@
-Composer - text generator
+
+info
 ========
+Composer - text generator
+
 
 Example
 ========
