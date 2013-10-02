@@ -1,5 +1,5 @@
 {
-  "name": "composer",
+  "name": "node-composer",
   "version": "0.0.1",
   "description": "text generator",
   "main": "index.js",
