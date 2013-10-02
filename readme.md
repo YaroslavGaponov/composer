@@ -25,7 +25,7 @@ console.log('STORAGE');
 console.log(storage._data);
 console.log();
 
-// print 10 sentenses
+// print 5 sentenses
 console.log('TEXT');
 var composer = Composer.Composer(storage, 4);
 for(var i=0; i<5; i++) {
