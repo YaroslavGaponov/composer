@@ -1,11 +1,3 @@
-Composer - text generator
-========
-
-Example
-========
-
-```javascript
-
 var fs = require('fs');
 
 var Composer = require('../index.js');
@@ -31,6 +23,3 @@ var composer = Composer.Composer(storage, 4);
 for(var i=0; i<5; i++) {
     console.log(composer.speak());
 }
-
-```
-
