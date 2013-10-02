@@ -9,6 +9,7 @@ Example
 
 ```javascript
 
+var util = require('util');
 var fs = require('fs');
 
 var Composer = require('../index.js');
@@ -19,21 +20,26 @@ var storage = new Composer.Storage();
 // read some text examples
 var text = fs.readFileSync('./test.txt').toString();
 
-// generate data
-var maker = Composer.Maker(storage);
-maker.parse(text);
+// generate database
+var maker = Composer.Maker(storage, 3);
+maker.addDocument(text);
 
 // print tree
 console.log('STORAGE');
-console.log(storage._data);
+console.log(util.inspect(storage._data,{ showHidden: false, depth: 3 }));
 console.log();
 
-// print 5 sentenses
+// print 5 sentences
 console.log('TEXT');
-var composer = Composer.Composer(storage, 4);
-for(var i=0; i<5; i++) {
-    console.log(composer.speak());
+var composer = Composer.Composer(storage);
+var sentences = [];
+while(sentences.length < 5) {
+    var sentence = composer.speak();
+    if (sentences.indexOf(sentence) === -1) {
+        sentences.push(sentence);
+    }
 }
+console.log(sentences.join(' ').toString());
 
 ```
 

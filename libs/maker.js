@@ -13,7 +13,7 @@ var Maker = module.exports = function(storage, length) {
     }
 }
 
-Maker.prototype.parse = function(text) {
+Maker.prototype.addDocument = function(text) {
 
     var keys;
     var acc;
